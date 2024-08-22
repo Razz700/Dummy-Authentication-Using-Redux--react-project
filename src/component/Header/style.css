@@ -1,0 +1,19 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid white;
+    padding: 10px;
+}
+.navigate{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap:20px;
+}
+.navigate .nav-btn{
+cursor: pointer;
+}
+.navigate .nav-btn:hover{
+    color: rgb(183, 182, 182);
+}
