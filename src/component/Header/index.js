@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 
-function Header() {
+function Header({userData}) {
   const navigate=useNavigate();
   const isLoggedIn=useSelector((state)=>state.userAuth.isLoggedIn);
   
 
   useEffect(()=>{  
-if (isLoggedIn){
+if (isLoggedIn && userData!=null){
   navigate('/profile');
 }
 },[isLoggedIn]);

@@ -17,6 +17,7 @@ function LoginPage() {
     const [password,setPassword]=useState('');
     const [error,setError]=useState(null);
     const [success,setSuccess]=useState(false);
+    const [userData,setUserData]=useState(null);
     
     const handleUserName=(e)=>setUserName(e.target.value);
     const handlePassword=(e)=>setPassword(e.target.value);
@@ -41,13 +42,16 @@ function LoginPage() {
           .then(res => res.json())
           .then(data=>{console.log(data);
             if(data.message!='Invalid credentials'){
+              setUserData(data);
               const obj={
                 id:data.id,
                 token:data.token
               }
               localStorage.setItem('activeUser',JSON.stringify(obj));
-              dispatch(isLoggedInCase(obj));
-              navigate('/profile');
+              setTimeout(()=>{
+                dispatch(isLoggedInCase(obj));
+                navigate('/profile');
+              },1000);
               setError(null);
               setSuccess(true);
             }else{
@@ -55,7 +59,7 @@ function LoginPage() {
             setSuccess(false);
             }  
           }).catch(e=>{
-            setError(e);
+            setError(e.message);
             setSuccess(false);
           });  
         }else{
@@ -66,7 +70,7 @@ function LoginPage() {
     ////////////////////////////////////////////////////
   return (
     <div className='login-page'>
-        <Header/>
+        <Header userData={userData}/>
         <div className='login'>
     <p className='title'>Login</p>
     <form>
